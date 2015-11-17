@@ -22,10 +22,6 @@ Problem description
 Proposed change
 ===============
 
--c <config_file>
--a <accounts_file>
--r <resources_file>
-
 Alternatives
 ------------
 
@@ -48,7 +44,7 @@ Milestones
 ----------
 
 Target Milestone for completion:
-  <release>
+  Mitaka-2
 
 Work Items
 ----------

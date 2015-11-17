@@ -71,12 +71,12 @@ Target Milestone for completion:
 Work Items
 ----------
 
-- <items>
+- TBD
 
 Dependencies
 ============
 
-- <dependencies>
+- TBD
 
 References
 ==========
