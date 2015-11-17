@@ -56,3 +56,8 @@ Dependencies
 ============
 
 - <dependencies>
+
+References
+==========
+
+- https://etherpad.openstack.org/p/tempest-cli-improvements

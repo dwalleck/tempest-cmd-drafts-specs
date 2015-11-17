@@ -22,6 +22,9 @@ Problem description
 Proposed change
 ===============
 
+-c <config_file>
+-a <accounts_file>
+-r <resources_file>
 
 Alternatives
 ------------
@@ -56,3 +59,8 @@ Dependencies
 ============
 
 - <dependencies>
+
+References
+==========
+
+- https://etherpad.openstack.org/p/mitaka-qa-tempest-run-cli 
