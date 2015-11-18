@@ -27,7 +27,7 @@ Proposed change
 
 Rather than have ``tempest init`` create workspaces in arbitrary directories,
 a more consistent approach would be to choose a single directory to contain
-Tempest workspaces. This provides a programatic means to manage workspaces.
+Tempest workspaces. This provides a programmatic means to manage workspaces.
 
 Create a workspace: ``tempest ws init <name>``
 List workspaces: ``tempest ws list``
