@@ -26,9 +26,11 @@ Proposed change
 -a <accounts_file>
 -r <resources_file>
 
-Alternatives
-------------
-
+Run tests by:
+- Python package
+- whitelist/blacklist regex
+- file
+- tags
 
 Projects
 ========
@@ -58,9 +60,10 @@ Work Items
 Dependencies
 ============
 
-- <dependencies>
+- Mitaka-3
 
 References
 ==========
 
-- https://etherpad.openstack.org/p/mitaka-qa-tempest-run-cli 
+- https://etherpad.openstack.org/p/mitaka-qa-tempest-run-cli
+- https://github.com/testing-cabal/testrepository/tree/master/testrepository/ui

@@ -12,7 +12,8 @@
 
 <blueprint>
 
-<description>
+Provides a means to list all existing tests to run via the Tempest command
+line tooling.
 
 
 Problem description
@@ -22,10 +23,24 @@ Problem description
 Proposed change
 ===============
 
+- List all core tests
+- List tests from plugins with special distinction?
+- Pretty print (nested by class)
 
-Alternatives
-------------
-
++-tempest/
+  +-api/
+    +-compute/
+    | test_authorization.py
+    | test_quotas.py
+    +-image/
+      +-v1/
+      | test_image_members.py
+      | test_images.py
+      | test_images_negative.py
+      +-v2/
+      | test_image_member.py
+      | test_images.py
+      | test_images_negative.py
 
 Projects
 ========
@@ -45,7 +60,7 @@ Milestones
 ----------
 
 Target Milestone for completion:
-  <release>
+  Mitaka-3
 
 Work Items
 ----------
