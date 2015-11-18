@@ -21,7 +21,7 @@ Problem description
 The Tempest project recently implemented a plugin system to allow external
 test repositories to be included in Tempest test runs in a seamless fashion.
 Tempest plugins are essentially Python packages that implement a specific
-interfaces and are installed via standard Python tools. However, there is
+interface and are installed via standard Python tools. However, there is
 not a straightforward means for knowing which plugins are currently installed.
 
 Proposed change
@@ -30,14 +30,14 @@ Proposed change
 Providing a means via the ``tempest`` command line tooling to list the
 installed plugins provides a consistent experience to the user. The command
 ``tempest plugins list`` would provide the user with basic information about
-the installed plugins:
+the installed plugins::
 
-+-----------+-----------------------+
-| Plugin    | Namespace             |
-+-----------+-----------------------+
-| Swift     | swift.test.functional |
-| EC2       | ec2.tests             |
-+-----------+-----------------------+
+  +-----------+-----------------------+
+  | Plugin    | Namespace             |
+  +-----------+-----------------------+
+  | Swift     | swift.test.functional |
+  | EC2       | ec2.tests             |
+  +-----------+-----------------------+
 
 
 Projects

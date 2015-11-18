@@ -12,25 +12,32 @@
 
 <blueprint>
 
-<description>
+Implements a flexible ``tempest run`` command to be used as the primary
+entry point for running tests.
 
 
 Problem description
 ===================
 
 
+
 Proposed change
 ===============
 
--c <config_file>
--a <accounts_file>
--r <resources_file>
+tempest run
 
-Run tests by:
-- Python package
-- whitelist/blacklist regex
-- file
-- tags
+  --config <config_file>
+  --accounts <accounts_file>
+  --resources <resources_file>
+  --pattern-include <regex>
+  --pattern-exclude <regex>
+  --tag <tag1>
+  --dry-run (processes any other arguments and then outputs the list 
+             of tests that would be executed)
+  --from-file <filename>
+    - file list
+    - regexes?
+
 
 Projects
 ========
