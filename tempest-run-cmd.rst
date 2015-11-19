@@ -81,7 +81,8 @@ Test Execution::
           | test_images.py
           | test_images_negative.py
 
-Test Selection/Discovery
+Test Selection/Discovery::
+
   --include <regex or file name>
   --exclude <regex or file name>
   --tag <tag_name>
@@ -89,7 +90,7 @@ Test Selection/Discovery
     --gate
     --smoke
 
-Output
+Output::
 
   --subunit
 
@@ -99,7 +100,6 @@ Optional
   --config <config_file>
   --accounts <accounts_file>
   --resources <resources_file>
-
 
 Projects
 ========
