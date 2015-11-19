@@ -27,7 +27,7 @@ What problems are we trying to solve by creating a Tempest/OpenStack-specific ru
 
 - Uses smart default behavior
 - Test selection/discovery
-- Parallelizsm
+- Parallelism
 - Test output
 - Built directly on testrepository.ui to leverage future testrepository
   development
@@ -38,10 +38,14 @@ running Tempest tests.
 - Explicit Class/method name
 - Explicit test list in file
 - Regex
+
   - Types
+  
     - White list
     - Black list
+    
   - Source
+  
     - Command line
     - Text file 
 
@@ -109,7 +113,6 @@ Output::
   --html <file_name>
 
 Optional::
---------
 
   --config <config_file>
   --accounts <accounts_file>
@@ -142,13 +145,8 @@ Work Items
 
 - Create Tempest client interface with testrepository.ui
 - Use new/existing testrepository code to handle translating all regexes and
-filters into the list of desired tests
+  filters into the list of desired tests
 - Implement ``tempest run`` command in Tempest with Cliff
-
-Dependencies
-============
-
-- <dependencies>
 
 References
 ==========
