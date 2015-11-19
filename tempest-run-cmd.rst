@@ -29,8 +29,14 @@ What problems are we trying to solve by creating a Tempest/OpenStack-specific ru
 - Test selection/discovery
 - Parallelizsm
 - Test output
+- Built directly on testrepository.ui to leverage future testrepository
+  development
 
-Usage Scenarios
+We also wanted to address the range of usage scenarios that arise when
+running Tempest tests.
+
+- Explicit Class/method name
+- Explicit test list in file
 - Regex
   - Types
     - White list
@@ -38,8 +44,6 @@ Usage Scenarios
   - Source
     - Command line
     - Text file 
-
-
 
 Proposed change
 ===============
@@ -83,8 +87,17 @@ Test Execution::
 
 Test Selection/Discovery::
 
+
   --include <regex or file name>
   --exclude <regex or file name>
+  
+  # included as a discussion point
+  # Can we reduce the need for and complexity of regexes by
+  # having more granular filtering?
+  --package <package filter>
+  --module <module filter>
+  --method <method filter>
+  
   --tag <tag_name>
   - Aliases for common Infra job regexes
     --gate
@@ -93,8 +106,9 @@ Test Selection/Discovery::
 Output::
 
   --subunit
+  --html <file_name>
 
-Optional
+Optional::
 --------
 
   --config <config_file>
@@ -126,12 +140,15 @@ Target Milestone for completion:
 Work Items
 ----------
 
-- <items>
+- Create Tempest client interface with testrepository.ui
+- Use new/existing testrepository code to handle translating all regexes and
+filters into the list of desired tests
+- Implement ``tempest run`` command in Tempest with Cliff
 
 Dependencies
 ============
 
-- Mitaka-3
+- <dependencies>
 
 References
 ==========
