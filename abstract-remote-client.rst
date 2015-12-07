@@ -39,7 +39,7 @@ Proposed change
 ===============
 
 
-Driver pseudocode:
+Driver pseudocode::
 
     class BaseDriver(object):
     
@@ -67,7 +67,7 @@ Driver pseudocode:
             return self.client.run_command(command)
 
 
-Remote client pseudocode:
+Remote client pseudocode::
 
     class BaseRemoteClient(object):
     
