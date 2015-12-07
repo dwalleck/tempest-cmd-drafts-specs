@@ -196,19 +196,15 @@ Implementation
 ==============
 
 - Define the base driver class with methods for connecting to and executing
-commands given a protocl (SSH, WinRM, etc)
-
+  commands given a protocl (SSH, WinRM, etc)
 - Create the base class remote client class that defines the
-methods that must be implemented to gather basic information about the
-targetted guest operating system
-
+  methods that must be implemented to gather basic information about the
+  targetted guest operating system
 - Modify the existing SSH client to implement the base driver interface
 - Create a WinRM implementation of the base driver class
-
 - Modify the existing Linux remote client to implement the remote client base
-class
+  class
 - Modify tests as necessary to use the remote client interface
-
 - Create additional remote client implementations for Windows and Solaris
 
 Assignee(s)
