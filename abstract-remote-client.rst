@@ -38,6 +38,13 @@ that can be implemented for any operating system.
 Proposed change
 ===============
 
+The proposed solution to this design issue is to provide extendable base
+classes for both the remote client and its driver. By doing so, testers
+and operators can provide implementations as necessary to allow for
+the images they use for testing. The tester would list the operating system
+of their image as part of the data in the resources.yaml, which would be used
+by the tests to load the correct remote client implementation. The following
+is an outline of the proposed solution.
 
 Driver pseudocode::
 
@@ -187,6 +194,20 @@ Remote client pseudocode::
             # Implementation
             return
 
+Drawbacks
+---------
+
+While a majority of the initial implementation is rearrangement of existing
+code, it does add complexity to the remote client. This implementation also
+requires that any driver or remote client implementation must live in tree
+with Tempest. This means that all implementations should be tests in some way
+to ensure that they function after a given change. To reduce the maintenance
+burden, I would suggest making both the driver and remote client extendable
+via plugins, which would allow external teams to create and maintain their
+own implementations without burdening the core Tempest testing process.
+If this is deemed to be an acceptable solution, that step could be rolled
+into this spec as well.
+
 Projects
 ========
 
@@ -218,15 +239,15 @@ Milestones
 ----------
 
 Target Milestone for completion:
-  Mitaka-2
+  Mitaka-3
 
 Dependencies
 ============
-
-- TBD
+- Tempest resources spec (https://review.openstack.org/#/c/173334/7)
 
 References
 ==========
 
-- Abstract driver and remote client ()
+- Proposed abstract driver and remote client (https://gist.github.com/dwalleck/ac95508280b1769686a8)
+- Existing out of tree abstract base remote client (https://github.com/openstack/cloudcafe/blob/master/cloudcafe/compute/common/clients/remote_instance/base_client.py)
 - Windows Remote Client based on pywinrm (https://github.com/openstack/opencafe/blob/master/cafe/plugins/winrm/cafe/engine/winrm/client.py)
