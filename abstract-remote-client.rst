@@ -10,7 +10,7 @@
 ==================================
 
 
-<blueprint>
+https://blueprints.launchpad.net/tempest/+spec/abstract-remote-client
 
 Creates an abstract model for remote clients which allows for the
 development of remote clients beyond the scope of the generic Linux case.
