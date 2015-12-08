@@ -48,7 +48,7 @@ of their image as part of the data in the resources.yaml, which would be used
 by the tests to load the correct remote client implementation. The following
 is an outline of the proposed solution.
 
-Proposed Class Diagram::
+Proposed Class Diagram:
 
 .. image:: https://www.lucidchart.com/documents/view/0d6ebf09-d919-4b5e-99d1-6d92f35c70a9#?=undefined
 
