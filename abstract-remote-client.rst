@@ -50,7 +50,7 @@ is an outline of the proposed solution.
 
 Proposed Class Diagram:
 
-.. image:: https://www.lucidchart.com/documents/view/0d6ebf09-d919-4b5e-99d1-6d92f35c70a9#?=undefined
+.. image:: https://www.lucidchart.com/publicSegments/view/002a4f91-dc2f-4603-aa44-04740fe73d43/image.png
 
 Driver Pseudocode::
 
