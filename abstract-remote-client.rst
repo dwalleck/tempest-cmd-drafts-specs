@@ -48,7 +48,7 @@ of their image as part of the data in the resources.yaml, which would be used
 by the tests to load the correct remote client implementation. The following
 is an outline of the proposed solution.
 
-`Proposed Class Diagram`_:
+`Proposed Class Diagram`_
 
 .. _Proposed Class Diagram: https://www.lucidchart.com/publicSegments/view/002a4f91-dc2f-4603-aa44-04740fe73d43/image.png
 
@@ -255,6 +255,8 @@ Dependencies
 References
 ==========
 
-- Proposed abstract driver and remote client (https://gist.github.com/dwalleck/ac95508280b1769686a8)
-- Existing out of tree abstract base remote client (https://github.com/openstack/cloudcafe/blob/master/cloudcafe/compute/common/clients/remote_instance/base_client.py)
-- Windows Remote Client based on pywinrm (https://github.com/openstack/opencafe/blob/master/cafe/plugins/winrm/cafe/engine/winrm/client.py)
+- `Existing out of tree abstract base remote client`_
+- `Windows remote client based on pywinrm`_
+
+.. _Existing out of tree abstract base remote client: https://github.com/openstack/cloudcafe/blob/master/cloudcafe/compute/common/clients/remote_instance/base_client.py
+.. _Windows remote client based on pywinrm: https://github.com/openstack/opencafe/blob/master/cafe/plugins/winrm/cafe/engine/winrm/client.py
