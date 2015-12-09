@@ -48,9 +48,9 @@ of their image as part of the data in the resources.yaml, which would be used
 by the tests to load the correct remote client implementation. The following
 is an outline of the proposed solution.
 
-Proposed Class Diagram:
+`Proposed Class Diagram`_:
 
-.. image:: https://www.lucidchart.com/publicSegments/view/002a4f91-dc2f-4603-aa44-04740fe73d43/image.png
+.. _Proposed Class Diagram: https://www.lucidchart.com/publicSegments/view/002a4f91-dc2f-4603-aa44-04740fe73d43/image.png
 
 Driver Pseudocode::
 
