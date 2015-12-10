@@ -12,11 +12,11 @@
 
 <blueprint>
 
-Implements a flexible ``tempest run`` command to be used as the primary
+Implements a domain-specific ``tempest run`` command to be used as the primary
 entry point for running Tempest tests.
 
 
-Problem description
+Problem Description
 ===================
 
 We want to provide a flexible runner that allows for granular control over
@@ -29,11 +29,11 @@ What problems are we trying to solve by creating a Tempest/OpenStack-specific ru
 - Test selection/discovery
 - Parallelism
 - Test output
-- Built directly on testrepository.ui to leverage future testrepository
+- Built directly on testrepository to leverage future testrepository
   development
 
 We also wanted to address the range of usage scenarios that arise when
-running Tempest tests.
+running Tempest tests:
 
 - Explicit Class/method name
 - Explicit test list in file
@@ -49,15 +49,23 @@ running Tempest tests.
     - Command line
     - Text file 
 
-Proposed change
+Proposed Change
 ===============
 
-Implementing this spec has two primary aspects: the internals of the runner
-that will interact directly with the testrepository.ui API, and the command
-line interface that will be exposed to users.
+Implementing this command has two aspects: the command line interface that
+users will interact with and a client that will drive the execution of tests
+by interfacing with the testr internals in testrepository.
 
-Internals
----------
+Steps
+
+- parse command line args
+- save any command line args that should be directly passed to testr
+- determine the set of tests to run based on command line args
+- call into run_argv with the testr specific commands and list of tests determined in the previous step
+- receive subunit results from testr
+- Perform any post-processing on results if applicable
+- print results to console
+- Write out files if necessary
 
 Command Line Interface
 ----------------------
@@ -95,8 +103,8 @@ Test Selection/Discovery::
   --include <regex or file name>
   --exclude <regex or file name>
   
-  # included as a discussion point
-  # Can we reduce the need for and complexity of regexes by
+  # Included as a discussion point
+  # Can we reduce the complexity of regexes by
   # having more granular filtering?
   --package <package filter>
   --module <module filter>
@@ -112,19 +120,17 @@ Output::
   --subunit
   --html <file_name>
 
-Optional::
+Tempest Configuration::
 
   --config <config_file>
   --accounts <accounts_file>
   --resources <resources_file>
 
+
 Projects
 ========
 
 * openstack/tempest
-
-Implementation
-==============
 
 Assignee(s)
 -----------
@@ -143,19 +149,29 @@ Target Milestone for completion:
 Work Items
 ----------
 
-- Create Tempest client interface with testrepository.ui
-- Use new/existing testrepository code to handle translating all regexes and
-  filters into the list of desired tests
-- Implement ``tempest run`` command in Tempest with Cliff
+- Create ``tempest run`` entry point in Tempest with cliff
+- Handle setup of Tempest specific options such as Tempest configuration
+- Implement test selection logic based on the provided filtering
+  options (regexes, tags, etc.) 
+- Create the client code that will interact with testrepository and
+  control test execution and results gathering
+- Implement handlers for any non-subunit output formats 
+
 
 References
 ==========
 
-- https://etherpad.openstack.org/p/mitaka-qa-tempest-run-cli
-- https://github.com/testing-cabal/testrepository/tree/master/testrepository/ui
+- `Mitaka Design Summit CLI Session`_
 
-Previous implementations/specs
+.. _Mitaka Design Summit CLI Session: https://etherpad.openstack.org/p/mitaka-qa-tempest-run-cli
 
-- https://github.com/openstack/os-testr/blob/master/os_testr/os_testr.py
-- https://review.openstack.org/#/c/197378/8/tempest/cmd/run.py
-- https://github.com/openstack/qa-specs/blob/master/specs/tempest/tempest-cli-improvements.rst
+Previous Implementations and Specs
+
+- `os-testr runner`_
+- `Prototype by mtreinish`_
+- `Previous Tempest CLI spec`_
+
+
+.. _os-testr runner: https://github.com/openstack/os-testr/blob/master/os_testr/os_testr.py
+.. _Prototype by mtreinish: https://review.openstack.org/#/c/197378/8/tempest/cmd/run.py
+.. _Previous Tempest CLI spec: https://github.com/openstack/qa-specs/blob/master/specs/tempest/tempest-cli-improvements.rst
