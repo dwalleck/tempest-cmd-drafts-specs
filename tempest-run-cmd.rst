@@ -10,7 +10,7 @@
 ==================================
 
 
-<blueprint>
+https://blueprints.launchpad.net/tempest/+spec/tempest-run-cmd
 
 Implements a domain-specific ``tempest run`` command to be used as the primary
 entry point for running Tempest tests.
@@ -19,6 +19,29 @@ entry point for running Tempest tests.
 Problem Description
 ===================
 
+Currently, the Tempest test suite can be executed using any testr-compatable
+runner. While this approach is flexible, it does not provide a consistent
+experience for users. Because these tests are in no way specific to Tempest,
+any items that are domain specific such as configuration must be performed
+out of band using shell scripts or other methods.
+
+An effort is already underway to create a unified Tempest command line tool.
+As part of that effort, this spec defines the ``tempest run`` command.
+
+
+Proposed Change
+===============
+
+Overview
+--------
+
+This command will provide a consistent entry point for executing the Tempest
+test suite. By creating a runner specific to Tempest
+
+Because this runner will be specific to Tempest, intuitive default behaviors
+can be created to lower the barrier of entry for new users.
+
+<start notes>
 We want to provide a flexible runner that allows for granular control over
 the test discovery and execution process that also provides reasonable
 default behaviors for less experienced users.
@@ -48,24 +71,29 @@ running Tempest tests:
   
     - Command line
     - Text file 
+</stop notes>
 
-Proposed Change
-===============
+
+Logical Flow
+------------
+
+- Parse command line arguments
+- Set necessary environment variables for Tempest based on inputs
+- Determine the set of tests to run based on provided filters
+- Call into `run_argv`_ or another testrepository entry point with the testr
+  specific arguments and the list of tests to be executed
+- Perform any post-processing on results if applicable
+
+.. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
+
+
+Implementation
+--------------
 
 Implementing this command has two aspects: the command line interface that
 users will interact with and a client that will drive the execution of tests
 by interfacing with the testr internals in testrepository.
 
-Steps
-
-- parse command line args
-- save any command line args that should be directly passed to testr
-- determine the set of tests to run based on command line args
-- call into run_argv with the testr specific commands and list of tests determined in the previous step
-- receive subunit results from testr
-- Perform any post-processing on results if applicable
-- print results to console
-- Write out files if necessary
 
 Command Line Interface
 ----------------------
