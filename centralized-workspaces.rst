@@ -47,6 +47,7 @@ of tests.
 
 Alternatives to having the workspace right after tempest (this would both limit
 workspace names & make the argparse much harder):
+
 * Adding a run command to ws -- ``tempest ws run <name> <args>``
 * Having a -ws option -- ``tempest run <args> -ws <name>``
 
