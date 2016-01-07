@@ -23,7 +23,6 @@ there is no way to track and manage these workspaces in a consistent manner.
 This becomes more problematic as the number of workspaces increases.
 
 
-
 Proposed change
 ===============
 
@@ -46,6 +45,11 @@ as well. For example, ``tempest devstack run <args>`` would be shorthand for
 using the configurations in the ``devstack`` workspace to run the desired set
 of tests.
 
+Alternatives to having the workspace right after tempest (this would both limit
+workspace names & make the argparse much harder):
+* Adding a run command to ws -- ``tempest ws run <name> <args>``
+* Having a -ws option -- ``tempest run <args> -ws <name>``
+
 
 Alternatives
 ------------
@@ -56,10 +60,12 @@ truth for Tempest workspaces. Any other operations would then use this file
 as a reference.  This file might not always be up to date if the user manually
 moves or deletes the workspace.
 
+
 Projects
 ========
 
 * openstack/tempest
+
 
 Implementation
 ==============
@@ -67,8 +73,8 @@ Implementation
 Assignee(s)
 -----------
 
-* slowrie <stephen.lowrie@rackspace.com>
-* dwalleck <daryl.walleck@rackspace.com>
+* slowrie
+* dwalleck
 
 Milestones
 ----------
@@ -80,6 +86,7 @@ Work Items
 ----------
 
 - TBD
+
 
 References
 ==========
