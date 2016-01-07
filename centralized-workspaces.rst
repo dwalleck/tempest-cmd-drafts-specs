@@ -22,6 +22,8 @@ directory the user is currently in. However, once these workspaces are created
 there is no way to track and manage these workspaces in a consistent manner.
 This becomes more problematic as the number of workspaces increases.
 
+
+
 Proposed change
 ===============
 
@@ -29,9 +31,9 @@ Rather than have ``tempest init`` create workspaces in arbitrary directories,
 a more consistent approach would be to choose a single directory to contain
 Tempest workspaces. This provides a programmatic means to manage workspaces.
 
-Create a workspace: ``tempest ws init <name>``
-List workspaces: ``tempest ws list``
-Delete a workspace: ``tempest ws delete <name>
+  Create a workspace: ``tempest ws init <name>``
+  List workspaces: ``tempest ws list``
+  Delete a workspace: ``tempest ws delete <name>
 
 The convention of referencing workspaces by name can be used by other commands
 as well. For example, ``tempest devstack run <args>`` would be shorthand for
@@ -60,6 +62,7 @@ Assignee(s)
 -----------
 
 Primary assignee:
+  slowrie
   dwalleck
 
 Milestones
@@ -70,11 +73,6 @@ Target Milestone for completion:
 
 Work Items
 ----------
-
-- TBD
-
-Dependencies
-============
 
 - TBD
 
