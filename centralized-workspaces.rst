@@ -78,7 +78,12 @@ Target Milestone for completion:
 Work Items
 ----------
 
-- TBD
+- Create argparse to handle new ``ws`` command and subcommands
+- Modify base init Cliff.command to target specific directory rather than the
+current directory
+- Create a way of detecting/tracking workspace related files for deletion
+- If the ``.tempest`` file alternative is chosen, handle parsing and deleting of
+workspace location references
 
 
 References
