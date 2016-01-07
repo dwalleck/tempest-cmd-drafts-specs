@@ -30,26 +30,17 @@ Rather than have ``tempest init`` create workspaces in arbitrary directories,
 a more consistent approach would be to choose a single directory to contain
 Tempest workspaces. This provides a programmatic means to manage workspaces.
 
-+---------------------+--------------------------+
-|       Action        |          Command         |
-+=====================+==========================+
-| Create a workspace: | tempest ws init <name>   |
-+---------------------+--------------------------+
-| List workspaces:    | tempest ws list          |
-+---------------------+--------------------------+
-| Delete a workspace: | tempest ws delete <name> |
-+---------------------+--------------------------+
-
-The convention of referencing workspaces by name can be used by other commands
-as well. For example, ``tempest devstack run <args>`` would be shorthand for
-using the configurations in the ``devstack`` workspace to run the desired set
-of tests.
-
-Alternatives to having the workspace right after tempest (this would both limit
-workspace names & make the argparse much harder):
-
-* Adding a run command to ws -- ``tempest ws run <name> <args>``
-* Having a -ws option -- ``tempest run <args> -ws <name>``
++-----------------------+------------------------------+
+|        Action         |            Command           |
++=======================+==============================+
+| Create a workspace:   | tempest ws init <name>       |
++-----------------------+------------------------------+
+| List workspaces:      | tempest ws list              |
++-----------------------+------------------------------+
+| Delete a workspace:   | tempest ws delete <name>     |
++-----------------------+------------------------------+
+| Run from a workspace: | tempest ws run <name> <args> |
++-----------------------+------------------------------+
 
 
 Alternatives
@@ -82,6 +73,7 @@ Milestones
 
 Target Milestone for completion:
   Mitaka-2
+  Mitaka-3 for run functionality
 
 Work Items
 ----------
