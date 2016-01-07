@@ -72,8 +72,8 @@ Milestones
 ----------
 
 Target Milestone for completion:
-  Mitaka-2
-  Mitaka-3 for run functionality
+- Mitaka-2
+- Mitaka-3 for run functionality
 
 Work Items
 ----------
