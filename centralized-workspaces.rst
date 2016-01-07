@@ -31,9 +31,15 @@ Rather than have ``tempest init`` create workspaces in arbitrary directories,
 a more consistent approach would be to choose a single directory to contain
 Tempest workspaces. This provides a programmatic means to manage workspaces.
 
-  Create a workspace: tempest ws init <name>
-  List workspaces: tempest ws list
-  Delete a workspace: tempest ws delete <name>
++---------------------+--------------------------+
+|       Action        |          Command         |
++=====================+==========================+
+| Create a workspace: | tempest ws init <name>   |
++---------------------+--------------------------+
+| List workspaces:    | tempest ws list          |
++---------------------+--------------------------+
+| Delete a workspace: | tempest ws delete <name> |
++---------------------+--------------------------+
 
 The convention of referencing workspaces by name can be used by other commands
 as well. For example, ``tempest devstack run <args>`` would be shorthand for
@@ -61,9 +67,8 @@ Implementation
 Assignee(s)
 -----------
 
-Primary assignee:
-* slowrie
-* dwalleck
+* slowrie <stephen.lowrie@rackspace.com>
+* dwalleck <daryl.walleck@rackspace.com>
 
 Milestones
 ----------
