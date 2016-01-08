@@ -42,14 +42,14 @@ Tempest workspaces. This provides a programmatic means to manage workspaces.
 | Run from a workspace: | tempest ws run <name> <args> |
 +-----------------------+------------------------------+
 
-Directory Structure
--------------------
+Sample Directory Structure
+--------------------------
 ::
 
   +-.tempest/
     +-devstack/
-    +-ironic/
-    +-grenade/
+    +-local/
+    +-staging/
 
 
 Example Usage
@@ -57,9 +57,9 @@ Example Usage
 ::
 
   tempest ws init devstack
-  tempest ws init ironic
+  tempest ws init staging
   tempest ws run devstack <additional args>
-  tempest ws run ironic <additional args>
+  tempest ws run staging <additional args>
 
 
 Alternatives
