@@ -45,10 +45,10 @@ Tempest workspaces. This provides a programmatic means to manage workspaces.
 Directory Structure
 -------------------
 
-  +-.tempest
-    +-devstack
-    +-ironic
-    +-grenade
+  +-.tempest/
+    +-devstack/
+    +-ironic/
+    +-grenade/
 
 
 Example Usage
