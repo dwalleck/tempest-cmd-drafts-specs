@@ -45,20 +45,19 @@ Tempest workspaces. This provides a programmatic means to manage workspaces.
 Directory Structure
 -------------------
 
-  +-~
-    +-.tempest
-      +-devstack
-      +-ironic
-      +-grenade
+  +-.tempest
+    +-devstack
+    +-ironic
+    +-grenade
 
 
 Example Usage
 -------------
 
-  tempest ws init devstack
-  tempest ws init ironic
-  tempest ws run devstack <additional args>
-  tempest ws run ironic <additional args>
+  - tempest ws init devstack
+  - tempest ws init ironic
+  - tempest ws run devstack <additional args>
+  - tempest ws run ironic <additional args>
 
 
 Alternatives
