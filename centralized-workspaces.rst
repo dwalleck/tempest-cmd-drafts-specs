@@ -29,13 +29,15 @@ of truth for Tempest workspaces. Users can register new workspaces via the
 ``tempest ws register`` command. The tracking file will automatically remove any
 deleted workspaces when ``tempest ws list`` is ran.
 
-+-----------------------+------------------------------+
-|        Action         |            Command           |
-+=======================+==============================+
-| Register a workspace: | tempest ws register <name>   |
-+-----------------------+------------------------------+
-| List workspaces:      | tempest ws list              |
-+-----------------------+------------------------------+
++-----------------------+------------------------------++
+|        Action         |            Command            |
++=======================+===============================+
+| Register a workspace: | tempest ws register <name>    |
++-----------------------+-------------------------------+
+| Rename a workspace:   | tempest ws rename <old> <new> |
++-----------------------+-------------------------------+
+| List workspaces:      | tempest ws list               |
++-----------------------+-------------------------------+
 
 Example Usage
 -------------
