@@ -58,6 +58,14 @@ Example Usage
   +----------------+--------------------------+
 
 
+Alternative to Register
+-----------------------
+
+Rather than having a register command, the registration could be moved into
+``tempest init``. This would add a new parameter for name into init which would
+be optional. If a name is not specified it would create a unique name.
+
+
 Projects
 ========
 
