@@ -66,6 +66,26 @@ Rather than having a register command, the registration could be moved into
 be optional. If a name is not specified it would create a unique name.
 
 
+Example of Alternative
+----------------------
+
+::
+
+  > cd ~/devstack
+  > tempest init devstack
+
+  > cd /etc/staging
+  > tempest init
+
+  > tempest ws list
+  +--------------------------------------+----------------+
+  | Name                                 | Location       |
+  +--------------------------------------+--------------- +
+  | devstack                             | /root/devstack |
+  | dae9b977-dc04-4d36-8d38-e28fc624384c | /etc/staging   |
+  +--------------------------------------+----------------+
+
+
 Projects
 ========
 
