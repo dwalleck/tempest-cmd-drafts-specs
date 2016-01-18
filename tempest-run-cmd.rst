@@ -21,12 +21,14 @@ Problem Description
 
 Currently, the Tempest test suite can be executed using any testr-compatable
 runner. While this approach is flexible, it does not provide a consistent
-experience for users. Because these tests are in no way specific to Tempest,
-any items that are domain specific such as configuration must be performed
-out of band using shell scripts or other methods.
+experience for consumers of Tempest. Because these test runners are in no
+way specific to Tempest,any items that are domain specific such as
+configuration must be performed out of band using shell scripts or other
+methods.
 
-An effort is already underway to create a unified Tempest command line tool.
-As part of that effort, this spec defines the ``tempest run`` command.
+An effort is already underway to create a set of Tempest-specific command
+line tooling. As part of that effort, this spec defines the ``tempest run``
+command.
 
 
 Proposed Change
@@ -49,7 +51,7 @@ default behaviors for less experienced users.
 What problems are we trying to solve by creating a Tempest/OpenStack-specific runner?
 
 - Uses smart default behavior
-- Test selection/discovery
+- Highly flexible test selection/discovery
 - Parallelism
 - Test output
 - Built directly on testrepository to leverage future testrepository
@@ -80,8 +82,9 @@ Logical Flow
 - Parse command line arguments
 - Set necessary environment variables for Tempest based on inputs
 - Determine the set of tests to run based on provided filters
-- Call into `run_argv`_ or another testrepository entry point with the testr
+- Call into `run_argv`_ or another testrepository entry point with testr
   specific arguments and the list of tests to be executed
+- Recieve results from test execution
 - Perform any post-processing on results if applicable
 
 .. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
@@ -126,7 +129,6 @@ Test Execution::
           | test_images_negative.py
 
 Test Selection/Discovery::
-
 
   --include <regex or file name>
   --exclude <regex or file name>
