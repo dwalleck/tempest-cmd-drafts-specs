@@ -40,6 +40,10 @@ Overview
 This command will provide a consistent entry point for executing the Tempest
 test suite. By creating a runner specific to Tempest
 
+We want to solve for the specutrim of Tempest use cases, ranging from a test
+contributor for an specific project to an engineer managing the OpenStack
+Infra gates.
+
 Because this runner will be specific to Tempest, intuitive default behaviors
 can be created to lower the barrier of entry for new users.
 
@@ -155,6 +159,13 @@ Tempest Configuration::
   --config <config_file>
   --accounts <accounts_file>
   --resources <resources_file>
+
+Regex File Format
+-----------------
+
+One regex per line in the form of:
+
+the_regex # Comments about the regex
 
 
 Projects
