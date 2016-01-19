@@ -29,13 +29,15 @@ of truth for Tempest workspaces. Users can register new workspaces via the
 ``tempest ws register`` command. The tracking file will automatically remove any
 deleted workspaces when ``tempest ws list`` is ran.
 
-+-----------------------+------------------------------+
-|        Action         |            Command           |
-+=======================+==============================+
-| Register a workspace: | tempest ws register <name>   |
-+-----------------------+------------------------------+
-| List workspaces:      | tempest ws list              |
-+-----------------------+------------------------------+
++-----------------------+-------------------------------+
+|        Action         |            Command            |
++=======================+===============================+
+| Register a workspace: | tempest ws register <name>    |
++-----------------------+-------------------------------+
+| Rename a workspace:   | tempest ws rename <old> <new> |
++-----------------------+-------------------------------+
+| List workspaces:      | tempest ws list               |
++-----------------------+-------------------------------+
 
 Example Usage
 -------------
@@ -56,6 +58,34 @@ Example Usage
   | devstack       | /root/devstack           |
   | staging        | /etc/staging             |
   +----------------+--------------------------+
+
+
+Alternative to Register
+-----------------------
+
+Rather than having a register command, the registration could be moved into
+``tempest init``. This would add a new parameter for name into init which would
+be optional. If a name is not specified it would create a unique name.
+
+
+Example of Alternative
+----------------------
+
+::
+
+  > cd ~/devstack
+  > tempest init devstack
+
+  > cd /etc/staging
+  > tempest init
+
+  > tempest ws list
+  +--------------------------------------+----------------+
+  | Name                                 | Location       |
+  +--------------------------------------+--------------- +
+  | devstack                             | /root/devstack |
+  | dae9b977-dc04-4d36-8d38-e28fc624384c | /etc/staging   |
+  +--------------------------------------+----------------+
 
 
 Projects
