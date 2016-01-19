@@ -59,8 +59,8 @@ The logical flow of the proposed test runner is as follows:
 - Set necessary environment variables for Tempest based on inputs.
 - Determine the set of tests to run based on the provided regexes and
   other filters.
-- Call into `run_argv`_ or another testrepository entry point with
-  testr-specific arguments and the list of tests to be executed.
+- Call into an existing testrepository entry point with the testr-specific
+  arguments and the list of tests to be executed.
 - Receive the results from test execution.
 - Perform any post-processing on the test results, if applicable.
 
@@ -97,7 +97,7 @@ Test Execution::
           | test_images_negative.py
 
 Test Selection and Discovery::
-  
+
   --test-dir <test directory>
   --package <test package>
   --tag <tag name>
@@ -106,7 +106,7 @@ Test Selection and Discovery::
   --exclude <regex or file name>
     
     Sample regex file:
-    
+
         (^tempest\.api) # Comments about this regex
         tempest.scenario.test_server_basic_ops # Matches this test explicitly
 
@@ -124,7 +124,7 @@ Tempest Configuration::
 
   --config <config file>
   --accounts <accounts file>
-  
+
 Test Selection
 --------------
 
@@ -133,8 +133,8 @@ used by the os-testr project. The following workflow describes the proposed
 test discovery and selection process:
 
 1. If either a test package or directory is passed as a parameter, then the
-   runner will use that path as the root directory for test discovery.
-   Otherwise, the current directory is used.
+   runner will use that as the root directory for test discovery. Otherwise,
+   the current directory is used.
 2. All tests in the root directory are loaded into a list.
 3. Any white list regexes are applied to the list of tests.
 4. Any black list regexes are applied to the list of tests.
@@ -144,9 +144,9 @@ test discovery and selection process:
 Testrepository Integration
 --------------------------
 
-One of the purposes of this spec is to develop an entry point from Tempest
+One of the goals of this spec is to develop an entry point from Tempest
 that integrates directly with testrepository, rather than calling out to
-testr with a subprocess. Not only is this a more sustainable design, but it
+testr with a subprocess. This integration is a more robust design and
 allows new features in testrepository to propagate more easily to the Tempest
 runner. Inversely, as the Tempest runner evolves, features that would be
 useful to any test runner can be pushed down the stack into testrepository.
