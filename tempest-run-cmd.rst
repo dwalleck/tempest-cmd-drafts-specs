@@ -23,10 +23,10 @@ testing to the testing of existing public and private clouds across multiple
 environments and configurations. Each of these user scenarios has its own
 requirements and challenges.
 
-The Tempest test suite currently can be executed using any testr-compatable
+Currently, the Tempest test suite can be executed using any testr-compatable
 runner. While this allows for some flexibility, it does not provide a
 consistent experience for consumers of Tempest. In addition, because these
-test runners are in no way specific to Tempest any items that are domain
+test runners are in no way specific to Tempest any, items that are domain
 specific (such as configuration) must be performed out-of-band using shell
 scripts or other means.
 
@@ -38,18 +38,18 @@ This spec addresses the following problems:
   discovery and execution processes
 - Facilitating ease of configuration and execution of Tempest across multiple
   environments and configurations
-- Extends testrepository directly in order to leverage current and future
-  testrepository features
+- Builds on testrepository directly in order to leverage current and future
+  testrepository capabilities
 
 
 Proposed Change
 ===============
 
-The implementation of this spec can be broken down into three logical components:
+This spec's implementation can be broken down into three logical components:
 
 - A command line interface that users will interact with
 - A function that takes the command line arguments and decides which tests
-  will be run
+  should be executed
 - A client that drives the execution of tests by interfacing directly with
   the testr internals in testrepository
 
@@ -60,8 +60,8 @@ The logical flow of the proposed test runner is as follows:
 - Determine the set of tests to run based on the provided regexes and
   other filters.
 - Call into `run_argv`_ or another testrepository entry point with
-  testr-specific arguments and the list of tests to be executed
-- Recieve results from test execution.
+  testr-specific arguments and the list of tests to be executed.
+- Receive the results from test execution.
 - Perform any post-processing on the test results, if applicable.
 
 .. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
@@ -131,9 +131,9 @@ Test Selection
 The test selection logic is based on the implementation used by the os-testr
 project. Tests will be selected based on the following workflow:
 
-1. If a test package or directory is passed as a parameter, it will be used
-   as the root directory for loading tests. Otherwise, the current directory
-   will be used as the root directory.
+1. If either a test package or directory is passed as a parameter, then the
+   runner will use that path as the root directory for test discovery.
+   Otherwise, the current directory is used.
 2. All tests in the root directory are loaded into a list.
 3. Any white list regexes are applied to the list of tests.
 4. Any black list regexes are applied to the list of tests.
@@ -142,15 +142,16 @@ project. Tests will be selected based on the following workflow:
 Testrepository Integration
 --------------------------
 
-One of the purposes of this effort is to develop an entry point from Tempest that
-integrates directly with testrepository rather than calling out to testr with a
-subprocess. Not only is this a more sustainable design, but it allows new
-features in testrepository to directly propigate to the Tempest runner. Inversely,
-as the Tempest runner evolves, features that are generic enough can be pushed down
-the stack into testrepository.
+One of the purposes of this spec is to develop an entry point from Tempest
+that integrates directly with testrepository, rather than calling out to
+testr with a subprocess. Not only is this a more sustainable design, but it
+allows new features in testrepository to propagate more easily to the Tempest
+runner. Inversely, as the Tempest runner evolves, features that would be
+useful to any test runner can be pushed down the stack into testrepository.
 
-The planned integration point of the Tempest runner with testrepository is the `CLI UI for testr`_.
-However, this only one possible approach. The final solution is likely to evolve during development. 
+The planned integration point of the tempest run command with testrepository
+is the `CLI UI for testr`_. However, this only one possible approach. The
+final solution is likely to evolve during development.
 
 .. _CLI UI for testr: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
 
