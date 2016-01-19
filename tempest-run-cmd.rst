@@ -144,7 +144,7 @@ Testrepository Integration
 
 One of the goals of this spec is to develop an entry point from Tempest
 that integrates directly with testrepository rather than calling out to
-testr with a subprocess. This integration is a more robust design and
+testr via subprocess. This integration is a more robust design that
 allows new features in testrepository to propagate more easily to the Tempest
 runner. Inversely, as the Tempest runner evolves, features that would be
 useful to any test runner can be pushed down the stack into testrepository.
