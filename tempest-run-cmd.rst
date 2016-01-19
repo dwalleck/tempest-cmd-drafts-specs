@@ -27,8 +27,8 @@ The Tempest test suite currently can be executed using any testr-compatable
 runner. While this allows for some flexibility, it does not provide a
 consistent experience for consumers of Tempest. In addition, because these
 test runners are in no way specific to Tempest any items that are domain
-specific such as configuration must be performed out-of-band using shell
-scripts or other methods.
+specific (such as configuration) must be performed out-of-band using shell
+scripts or other means.
 
 Since an effort is already underway to create a set of Tempest-specific
 command line tooling, this spec further defines a ``tempest run`` command.
@@ -44,6 +44,27 @@ This spec addresses the following problems:
 
 Proposed Change
 ===============
+
+The implementation of this spec can be broken down into three logical components:
+
+- a command line interface that users will interact with
+- a function that takes the command line arguments and decides which tests
+  will be run
+- a client that will drive the execution of tests by interfacing with the
+  testr internals in testrepository
+
+The logical flow of the proposed test runner is as follows:
+
+- Parse any command line arguments
+- Set necessary environment variables for Tempest based on inputs
+- Determine the set of tests to run based on the provided regexes and
+  other filters
+- Call into `run_argv`_ or another testrepository entry point with
+  testr-specific arguments and the list of tests to be executed
+- Recieve results from test execution
+- Perform any post-processing on results if applicable
+
+.. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
 
 Command Line Interface
 ----------------------
@@ -77,8 +98,8 @@ Test Execution::
 
 Test Selection/Discovery::
   
-  --test-dir <test package>
-  --package <package filter>
+  --test-dir <test directory>
+  --package <test package>
   --tag <tag name>
 
   --include <regex or file name>
@@ -103,48 +124,30 @@ Tempest Configuration::
 
   --config <config file>
   --accounts <accounts file>
-
-
-Implementation
+  
+Test Selection
 --------------
 
-The logical flow of the proposed test runner is as follows:
+The test selection logic is based on the implementation used by the os-testr
+project. Tests will be selected based on the following workflow:
 
-- Parse any command line arguments
-- Set necessary environment variables for Tempest based on inputs
-- Determine the set of tests to run based on the provided regexes and
-  other filters
-- Call into `run_argv`_ or another testrepository entry point with
-  testr-specific arguments and the list of tests to be executed
-- Recieve results from test execution
-- Perform any post-processing on results if applicable
-
-.. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
-
+1. If a test package or directory is passed as a parameter, it will be used
+   as the root directory for loading tests. Otherwise, the current directory
+   will be used as the root directory.
+2. All tests in the root directory are loaded into a list.
+2. Any white list regexes are applied to the list of tests.
+3. Any black list regexes are applied to the list of tests.
+4. Any tags are applied to the remaining tests.
 
 Projects
 ========
 
 * openstack/tempest
 
-Assignee(s)
------------
+Implementation
+==============
 
-Primary assignee:
-  dwalleck
-  sammyd
-  slowrie
-
-Milestones
-----------
-
-Target Milestone for completion:
-  Mitaka-3
-
-Work Items
-----------
-
-- Create a ``tempest run`` entry point in Tempest based on the cliff package
+- Create a ``tempest run`` entry point in Tempest using cliff
 - Handle setup of Tempest specific options such as Tempest configuration
 - Implement test selection logic based on the provided filtering
   options (regexes, tags, etc.)
@@ -152,6 +155,20 @@ Work Items
   control test execution and results gathering
 - Implement handlers for any non-subunit output formats
 
+Assignee(s)
+-----------
+
+Primary assignee:
+
+- dwalleck
+- sammyd
+- slowrie
+
+Milestones
+----------
+
+Target Milestone for completion:
+  Mitaka-3
 
 References
 ==========
@@ -165,7 +182,6 @@ Previous Implementations and Specs
 - `os-testr runner`_
 - `Prototype by mtreinish`_
 - `Previous Tempest CLI spec`_
-
 
 .. _os-testr runner: https://github.com/openstack/os-testr/blob/master/os_testr/os_testr.py
 .. _Prototype by mtreinish: https://review.openstack.org/#/c/197378/8/tempest/cmd/run.py
