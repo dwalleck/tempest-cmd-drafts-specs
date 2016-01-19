@@ -11,88 +11,44 @@
 
 https://blueprints.launchpad.net/tempest/+spec/tempest-run-cmd
 
-Implements a domain-specific ``tempest run`` command to be used as the primary
+Describes a domain-specific ``tempest run`` command to be used as the primary
 entry point for running Tempest tests.
 
 
 Problem Description
 ===================
 
-There are a wide range of Tempest use cases ranging from gate testing to
-existing public and private clouds across many environments and
-configurations.
+There are a wide range of Tempest use cases ranging from OpenStack gate
+testing to the testing of existing public and private clouds across multiple
+environments and configurations. Each of these user scenarios has its own
+requirements and challenges.
 
 The Tempest test suite currently can be executed using any testr-compatable
 runner. While this allows for some flexibility, it does not provide a
 consistent experience for consumers of Tempest. In addition, because these
-test runners are in no way specific to Tempest, any items that are domain
-specific such as configuration must be performed out of band using shell
+test runners are in no way specific to Tempest any items that are domain
+specific such as configuration must be performed out-of-band using shell
 scripts or other methods.
 
 Since an effort is already underway to create a set of Tempest-specific
-command line tooling, this spec further defines the ``tempest run`` command.
-Problems addressed by this spec include:
+command line tooling, this spec further defines a ``tempest run`` command.
+This spec addresses the following problems:
 
 - Providing a flexible runner that enables multiple approaches to the test
   discovery and execution processes
-- Facilitating ease of configuration and execution of Tempest more across
-  multiple environments and configurations
-- Uses testrepository directly in order to leverage current and future
+- Facilitating ease of configuration and execution of Tempest across multiple
+  environments and configurations
+- Extends testrepository directly in order to leverage current and future
   testrepository features
 
 
 Proposed Change
 ===============
 
-Because this command will provide a consistent entry point for executing the Tempest
-test suite, intuitive default behaviors can be created to lower the barrier of
-entry for new users.
-
-What problems are we trying to solve by creating a Tempest/OpenStack-specific runner?
-
-- Uses smart default behavior
-- Highly flexible test selection/discovery
-- Parallelism
-- Test output
-- Explicit Class/method name
-- Explicit test list in file
-- Regex
-  - Types
-    - White list
-    - Black list
-  - Source
-    - Command line
-    - Text file
-
-
-Implementation
---------------
-
-The logical flow of the test runner is as follows:
-
-- Parse command line arguments
-- Set necessary environment variables for Tempest based on inputs
-- Determine the set of tests to run based on provided filters
-- Call into `run_argv`_ or another testrepository entry point with
-  testr-specific arguments and the list of tests to be executed
-- Recieve results from test execution
-- Perform any post-processing on results if applicable
-
-.. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
-
-The implementation of this spec can be broken down into three logical pieces:
-
-- a command line interface that users will interact with
-- a library that takes the command line arguements and decides which tests
-  will be run
-- a client that will drive the execution of tests by interfacing with the
-  testr internals in testrepository.
-
-
 Command Line Interface
 ----------------------
 
-tempest run
+The list of proposed command line arguments are as follows:
 
 Test Execution::
 
@@ -123,16 +79,17 @@ Test Selection/Discovery::
   
   --test-dir <test package>
   --package <package filter>
-  --tag <tag_name>
+  --tag <tag name>
 
   --include <regex or file name>
   --exclude <regex or file name>
     
     File format:
     
-    the_regex # Comments about the regex
+    regex1 # Comments about this regex
+    another_regex
 
-Aliases for most often used regez::
+Aliases for most commonly used regexes::
 
     --gate
     --smoke
@@ -140,12 +97,29 @@ Aliases for most often used regez::
 Output::
 
   --subunit
-  --html <file_name>
+  --html <file name>
 
 Tempest Configuration::
 
-  --config <config_file>
-  --accounts <accounts_file>
+  --config <config file>
+  --accounts <accounts file>
+
+
+Implementation
+--------------
+
+The logical flow of the proposed test runner is as follows:
+
+- Parse any command line arguments
+- Set necessary environment variables for Tempest based on inputs
+- Determine the set of tests to run based on the provided regexes and
+  other filters
+- Call into `run_argv`_ or another testrepository entry point with
+  testr-specific arguments and the list of tests to be executed
+- Recieve results from test execution
+- Perform any post-processing on results if applicable
+
+.. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
 
 
 Projects
@@ -170,7 +144,7 @@ Target Milestone for completion:
 Work Items
 ----------
 
-- Create ``tempest run`` entry point in Tempest with cliff
+- Create a ``tempest run`` entry point in Tempest based on the cliff package
 - Handle setup of Tempest specific options such as Tempest configuration
 - Implement test selection logic based on the provided filtering
   options (regexes, tags, etc.)
