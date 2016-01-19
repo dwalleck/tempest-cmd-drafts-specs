@@ -64,8 +64,6 @@ The logical flow of the proposed test runner is as follows:
 - Receive the results from test execution.
 - Perform any post-processing on the test results, if applicable.
 
-.. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
-
 Command Line Interface
 ----------------------
 
@@ -145,7 +143,7 @@ Testrepository Integration
 --------------------------
 
 One of the goals of this spec is to develop an entry point from Tempest
-that integrates directly with testrepository, rather than calling out to
+that integrates directly with testrepository rather than calling out to
 testr with a subprocess. This integration is a more robust design and
 allows new features in testrepository to propagate more easily to the Tempest
 runner. Inversely, as the Tempest runner evolves, features that would be
