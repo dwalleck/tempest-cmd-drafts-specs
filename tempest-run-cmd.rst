@@ -135,9 +135,9 @@ project. Tests will be selected based on the following workflow:
    as the root directory for loading tests. Otherwise, the current directory
    will be used as the root directory.
 2. All tests in the root directory are loaded into a list.
-2. Any white list regexes are applied to the list of tests.
-3. Any black list regexes are applied to the list of tests.
-4. Any tags are applied to the remaining tests.
+3. Any white list regexes are applied to the list of tests.
+4. Any black list regexes are applied to the list of tests.
+5. Any tags are applied to the remaining tests.
 
 Projects
 ========
