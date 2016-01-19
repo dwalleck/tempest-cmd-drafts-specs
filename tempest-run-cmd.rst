@@ -96,7 +96,7 @@ Test Execution::
           | test_images.py
           | test_images_negative.py
 
-Test Selection/Discovery::
+Test Selection and Discovery::
   
   --test-dir <test directory>
   --package <test package>
@@ -128,8 +128,9 @@ Tempest Configuration::
 Test Selection
 --------------
 
-The test selection logic is based on the implementation used by the os-testr
-project. Tests will be selected based on the following workflow:
+The proposed solution uses test discovery logic based on the implementation
+used by the os-testr project. The following workflow describes the proposed
+test discovery and selection process:
 
 1. If either a test package or directory is passed as a parameter, then the
    runner will use that path as the root directory for test discovery.
@@ -138,6 +139,7 @@ project. Tests will be selected based on the following workflow:
 3. Any white list regexes are applied to the list of tests.
 4. Any black list regexes are applied to the list of tests.
 5. Any tags are applied to the remaining tests.
+6. The remaining tests are returned for execution.
 
 Testrepository Integration
 --------------------------
@@ -165,7 +167,7 @@ Implementation
 
 - Create a ``tempest run`` entry point in Tempest using cliff
 - Handle setup of Tempest specific options such as Tempest configuration
-- Implement test selection logic based on the provided filtering
+- Implement test discovery and selection logic based on the provided filtering
   options (regexes, tags, etc.)
 - Create the client code that will interact with testrepository and
   control test execution and results gathering
