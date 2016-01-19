@@ -149,7 +149,7 @@ features in testrepository to directly propigate to the Tempest runner. Inversel
 as the Tempest runner evolves, features that are generic enough can be pushed down
 the stack into testrepository.
 
-The planned integration point of the Tempest runner with testrepository is the `CLI UI for testr`_ .
+The planned integration point of the Tempest runner with testrepository is the `CLI UI for testr`_.
 However, this only one possible approach. The final solution is likely to evolve during development. 
 
 .. _CLI UI for testr: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
