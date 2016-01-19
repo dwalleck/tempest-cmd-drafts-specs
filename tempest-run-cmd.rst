@@ -47,22 +47,22 @@ Proposed Change
 
 The implementation of this spec can be broken down into three logical components:
 
-- a command line interface that users will interact with
-- a function that takes the command line arguments and decides which tests
+- A command line interface that users will interact with
+- A function that takes the command line arguments and decides which tests
   will be run
-- a client that will drive the execution of tests by interfacing with the
-  testr internals in testrepository
+- A client that drives the execution of tests by interfacing directly with
+  the testr internals in testrepository
 
 The logical flow of the proposed test runner is as follows:
 
-- Parse any command line arguments
-- Set necessary environment variables for Tempest based on inputs
+- Parse any command line arguments.
+- Set necessary environment variables for Tempest based on inputs.
 - Determine the set of tests to run based on the provided regexes and
-  other filters
+  other filters.
 - Call into `run_argv`_ or another testrepository entry point with
   testr-specific arguments and the list of tests to be executed
-- Recieve results from test execution
-- Perform any post-processing on results if applicable
+- Recieve results from test execution.
+- Perform any post-processing on the test results, if applicable.
 
 .. _run_argv: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
 
@@ -105,10 +105,10 @@ Test Selection/Discovery::
   --include <regex or file name>
   --exclude <regex or file name>
     
-    File format:
+    Sample regex file:
     
-    regex1 # Comments about this regex
-    another_regex
+        (^tempest\.api) # Comments about this regex
+        tempest.scenario.test_server_basic_ops # Matches this test explicitly
 
 Aliases for most commonly used regexes::
 
@@ -138,6 +138,21 @@ project. Tests will be selected based on the following workflow:
 3. Any white list regexes are applied to the list of tests.
 4. Any black list regexes are applied to the list of tests.
 5. Any tags are applied to the remaining tests.
+
+Testrepository Integration
+--------------------------
+
+One of the purposes of this effort is to develop an entry point from Tempest that
+integrates directly with testrepository rather than calling out to testr with a
+subprocess. Not only is this a more sustainable design, but it allows new
+features in testrepository to directly propigate to the Tempest runner. Inversely,
+as the Tempest runner evolves, features that are generic enough can be pushed down
+the stack into testrepository.
+
+The planned integration point of the Tempest runner with testrepository is the `CLI UI for testr`_ .
+However, this only one possible approach. The final solution is likely to evolve during development. 
+
+.. _CLI UI for testr: https://github.com/testing-cabal/testrepository/blob/master/testrepository/commands/__init__.py#L165
 
 Projects
 ========
